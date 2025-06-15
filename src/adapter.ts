@@ -49,15 +49,57 @@ export abstract class Adapter {
     protected async request(
         method: string,
         url: string,
+        headers?: string[],
+        body?: Record<string, any> | null,
+        timeout?: number
+    ): Promise<RequestResponse>;
+    protected async request(
+        options: {
+            method: string;
+            url: string;
+            headers?: string[];
+            body?: Record<string, any> | null;
+            timeout?: number;
+        }
+    ): Promise<RequestResponse>;
+    protected async request(
+        methodOrOptions: string | {
+            method: string;
+            url: string;
+            headers?: string[];
+            body?: Record<string, any> | null;
+            timeout?: number;
+        },
+        url?: string,
         headers: string[] = [],
         body: Record<string, any> | null = null,
         timeout: number = 30
     ): Promise<RequestResponse> {
+        let method: string;
+        let finalUrl: string;
+        let finalHeaders: string[];
+        let finalBody: Record<string, any> | null;
+        let finalTimeout: number;
+
+        if (typeof methodOrOptions === 'string') {
+            method = methodOrOptions;
+            finalUrl = url!;
+            finalHeaders = headers;
+            finalBody = body;
+            finalTimeout = timeout;
+        } else {
+            method = methodOrOptions.method;
+            finalUrl = methodOrOptions.url;
+            finalHeaders = methodOrOptions.headers || [];
+            finalBody = methodOrOptions.body || null;
+            finalTimeout = methodOrOptions.timeout || 30;
+        }
+
         const requestHeaders: Record<string, string> = {};
         let requestBody: string | undefined;
 
         // Process headers
-        headers.forEach(header => {
+        finalHeaders.forEach(header => {
             const [key, value] = header.split(': ');
             if (key && value) {
                 requestHeaders[key] = value;
@@ -65,15 +107,15 @@ export abstract class Adapter {
         });
 
         // Process body based on content type
-        if (body) {
-            const contentType = headers.find(h => h.includes('application/json'));
-            const formType = headers.find(h => h.includes('application/x-www-form-urlencoded'));
+        if (finalBody) {
+            const contentType = finalHeaders.find(h => h.includes('application/json'));
+            const formType = finalHeaders.find(h => h.includes('application/x-www-form-urlencoded'));
 
             if (contentType) {
-                requestBody = JSON.stringify(body);
+                requestBody = JSON.stringify(finalBody);
                 requestHeaders['Content-Type'] = 'application/json';
             } else if (formType) {
-                requestBody = new URLSearchParams(body as Record<string, string>).toString();
+                requestBody = new URLSearchParams(finalBody as Record<string, string>).toString();
                 requestHeaders['Content-Type'] = 'application/x-www-form-urlencoded';
             }
         }
@@ -82,9 +124,9 @@ export abstract class Adapter {
 
         try {
             const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), timeout * 1000);
+            const timeoutId = setTimeout(() => controller.abort(), finalTimeout * 1000);
 
-            const response = await fetch(url, {
+            const response = await fetch(finalUrl, {
                 method,
                 headers: requestHeaders,
                 body: requestBody,
@@ -101,14 +143,14 @@ export abstract class Adapter {
             }
 
             return {
-                url,
+                url: finalUrl,
                 statusCode: response.status,
                 response: responseData,
                 error: null
             };
         } catch (error) {
             return {
-                url,
+                 url: finalUrl,
                 statusCode: 0,
                 response: null,
                 error: error instanceof Error ? error.message : 'Unknown error'
@@ -122,16 +164,57 @@ export abstract class Adapter {
     protected async requestMulti(
         method: string,
         urls: string[],
+        headers?: string[],
+        bodies?: Array<Record<string, any>>,
+        timeout?: number
+    ): Promise<MultiRequestResponse[]>;
+    protected async requestMulti(
+        options: {
+            method: string;
+            urls: string[];
+            headers?: string[];
+            bodies?: Array<Record<string, any>>;
+            timeout?: number;
+        }
+    ): Promise<MultiRequestResponse[]>;
+    protected async requestMulti(
+        methodOrOptions: string | {
+            method: string;
+            urls: string[];
+            headers?: string[];
+            bodies?: Array<Record<string, any>>;
+            timeout?: number;
+        },
+        urls?: string[],
         headers: string[] = [],
         bodies: Array<Record<string, any>> = [],
         timeout: number = 30
     ): Promise<MultiRequestResponse[]> {
-        if (urls.length === 0) {
+        let method: string;
+        let finalUrls: string[];
+        let finalHeaders: string[];
+        let finalBodies: Array<Record<string, any>>;
+        let finalTimeout: number;
+
+        if (typeof methodOrOptions === 'string') {
+            method = methodOrOptions;
+            finalUrls = urls!;
+            finalHeaders = headers;
+            finalBodies = bodies;
+            finalTimeout = timeout;
+        } else {
+            method = methodOrOptions.method;
+            finalUrls = methodOrOptions.urls;
+            finalHeaders = methodOrOptions.headers || [];
+            finalBodies = methodOrOptions.bodies || [];
+            finalTimeout = methodOrOptions.timeout || 30;
+        }
+        if (finalUrls.length === 0) {
             throw new Error('No URLs provided. Must provide at least one URL.');
         }
 
-        const urlCount = urls.length;
-        const bodyCount = bodies.length;
+        const urlCount = finalUrls.length;
+        const bodyCount = finalBodies.length;
 
         if (!(urlCount === bodyCount || urlCount === 1 || bodyCount === 1)) {
             throw new Error('URL and body counts must be equal or one must equal 1.');
@@ -139,9 +222,9 @@ export abstract class Adapter {
 
         // Pad arrays if needed
         const paddedUrls = urlCount < bodyCount ?
-            Array(bodyCount).fill(urls[0]) : urls;
+            Array(bodyCount).fill(finalUrls[0]) : finalUrls;
         const paddedBodies = bodyCount < urlCount ?
-            Array(urlCount).fill(bodies[0] || {}) : bodies;
+            Array(urlCount).fill(finalBodies[0] || {}) : finalBodies;
 
         const requests = paddedUrls.map(async (url, index) => {
             try {
