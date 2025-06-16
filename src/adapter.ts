@@ -49,7 +49,7 @@ export abstract class Adapter {
     protected async request(
         method: string,
         url: string,
-        headers?: string[],
+        headers?: string[] | Record<string, string>,
         body?: Record<string, any> | null,
         timeout?: number
     ): Promise<RequestResponse>;
@@ -57,7 +57,7 @@ export abstract class Adapter {
         options: {
             method: string;
             url: string;
-            headers?: string[];
+            headers?: string[] | Record<string, string>;
             body?: Record<string, any> | null;
             timeout?: number;
         }
@@ -66,18 +66,18 @@ export abstract class Adapter {
         methodOrOptions: string | {
             method: string;
             url: string;
-            headers?: string[];
+            headers?: string[] | Record<string, string>;
             body?: Record<string, any> | null;
             timeout?: number;
         },
         url?: string,
-        headers: string[] = [],
+        headers: string[] | Record<string, string> = [],
         body: Record<string, any> | null = null,
         timeout: number = 30
     ): Promise<RequestResponse> {
         let method: string;
         let finalUrl: string;
-        let finalHeaders: string[];
+        let finalHeaders: string[]  | Record<string, string>;
         let finalBody: Record<string, any> | null;
         let finalTimeout: number;
 
@@ -99,6 +99,12 @@ export abstract class Adapter {
         let requestBody: string | undefined;
 
         // Process headers
+        if (Array.isArray(finalHeaders)) {
+            finalHeaders = finalHeaders.filter(header => header.includes(': '));
+        } else if (typeof finalHeaders === 'object') {
+            finalHeaders = Object.entries(finalHeaders).map(([key, value]) => `${key}: ${value}`);
+        }
+        
         finalHeaders.forEach(header => {
             const [key, value] = header.split(': ');
             if (key && value) {
