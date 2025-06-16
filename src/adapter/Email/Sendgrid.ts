@@ -73,18 +73,15 @@ export class Sendgrid extends EmailAdapter {
             let size = 0;
 
             for (const attachment of message.getAttachments()!) {
-                const fs = await import('fs');
-                const stats = fs.statSync(attachment.getPath());
-                size += stats.size;
+                size += await attachment.getSize();
             }
 
             if (size > Sendgrid.MAX_ATTACHMENT_BYTES) {
                 throw new Error('Attachments size exceeds the maximum allowed size of 25MB');
             }
 
-            const fs = await import('fs');
             for (const attachment of message.getAttachments()!) {
-                const content = fs.readFileSync(attachment.getPath());
+                const content = await attachment.getData();
                 attachments.push({
                     content: content.toString('base64'),
                     filename: attachment.getName(),

@@ -4,7 +4,9 @@
   "type": "module",
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.9",
-    "jsonwebtoken": "^9.0.2"
+    "@types/nodemailer": "^6.4.17",
+    "jsonwebtoken": "^9.0.2",
+    "nodemailer": "^7.0.3"
   },
   "peerDependencies": {
     "typescript": "^5"

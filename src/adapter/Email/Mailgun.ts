@@ -38,7 +38,7 @@ export class Mailgun extends EmailAdapter {
      * 
      * @link https://documentation.mailgun.com/docs/mailgun/user-manual/sending-messages/#batch-sending
      */
-    protected async process(message: EmailMessage)  {
+    protected async process(message: EmailMessage) {
         const usDomain = 'api.mailgun.net';
         const euDomain = 'api.eu.mailgun.net';
         const domain = this.isEU ? euDomain : usDomain;
@@ -95,23 +95,26 @@ export class Mailgun extends EmailAdapter {
         if (message.getAttachments()) {
             let size = 0;
             for (const attachment of message.getAttachments()!) {
-                size += attachment.getSize();
+                size += await attachment.getSize();
             }
 
             if (size > Mailgun.MAX_ATTACHMENT_BYTES) {
                 throw new Error('Attachments size exceeds the maximum allowed size');
             }
 
-            message.getAttachments()?.forEach((attachment, index) => {
+            if (message.getAttachments()!.length > 0) {
                 isMultipart = true;
-                body[`attachment[${index}]`] = {
-                    value: attachment.getData(),
-                    options: {
-                        filename: attachment.getName(),
-                        contentType: attachment.getType(),
-                    }
-                };
-            });
+                for (let index = 0; index < message.getAttachments()!.length; index++) {
+                    const attachment = message.getAttachments()![index]!;
+                    body[`attachment[${index}]`] = {
+                        value: (await attachment.getData()).toString('base64'),
+                        options: {
+                            filename: attachment.getName(),
+                            contentType: attachment.getType(),
+                        }
+                    };
+                }
+            }
         }
 
         const response = new Response(this.getType());
