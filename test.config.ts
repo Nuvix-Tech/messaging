@@ -100,12 +100,12 @@ export const testConfig: TestConfig = {
   },
   
   smtp: {
-    host: process.env.SMTP_HOST || 'smtp.gmail.com',
-    port: parseInt(process.env.SMTP_PORT || '587'),
-    secure: process.env.SMTP_SECURE === 'true' || false,
-    username: process.env.SMTP_USERNAME || 'your-email@gmail.com',
-    password: process.env.SMTP_PASSWORD || 'your-app-password',
-    testEmail: process.env.TEST_EMAIL || 'test@example.com',
+    host: process.env.SMTP_HOST || 'mail.nuvix.in',
+    port: parseInt(process.env.SMTP_PORT || '465'),
+    secure: process.env.SMTP_SECURE === 'true' || true,
+    username: process.env.SMTP_USERNAME || 'server@nuvix.in',
+    password: process.env.SMTP_PASSWORD || 'Ravi@saini#n1',
+    testEmail: process.env.TEST_EMAIL || 'ravikantsaini047@gmail.com',
   },
   
   twilio: {

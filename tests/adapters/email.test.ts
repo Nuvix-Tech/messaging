@@ -269,6 +269,7 @@ describe('Email Adapters', () => {
         });
         
         const result = await adapter.send(email);
+        console.log(result, '<===========================!')
         assertSuccessfulSendResult(result as any, 1);
         
         console.log('✅ SMTP email sent successfully');

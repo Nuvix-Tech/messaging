@@ -40,7 +40,9 @@ export class SMTP extends EmailAdapter {
                 user: this.username,
                 pass: this.password
             } : undefined,
-            tls: this.smtpSecure === 'tls' ? { rejectUnauthorized: false } : undefined
+            tls: this.smtpSecure === 'tls' ? { rejectUnauthorized: false } : undefined,
+            debug: true, // Enable debug output for testing
+            logger: true // Enable logging for debugging
         });
     }
 
@@ -104,7 +106,6 @@ export class SMTP extends EmailAdapter {
 
         try {
             const info = await this.transporter.sendMail(mailOptions);
-            console.log(`Email sent: ${info}`); // TODO: remove 
 
             const totalDelivered = message.getTo().length + message.getCC()!.length + message.getBCC()!.length;
             response.setDeliveredTo(totalDelivered);

@@ -29,9 +29,9 @@ export class Email implements Message {
     private fromEmail: string;
     private replyToName: string;
     private replyToEmail: string;
-    private cc?: EmailRecipient[] = [];
-    private bcc?: EmailRecipient[] = [];
-    private attachments?: Attachment[] = [];
+    private cc?: EmailRecipient[];
+    private bcc?: EmailRecipient[];
+    private attachments?: Attachment[];
     private html: boolean;
     private defaultRecipient?: string;
 
@@ -43,9 +43,9 @@ export class Email implements Message {
         this.fromEmail = props.fromEmail;
         this.replyToName = props.replyToName ?? props.fromName;
         this.replyToEmail = props.replyToEmail ?? props.fromEmail;
-        this.cc = props.cc;
-        this.bcc = props.bcc;
-        this.attachments = props.attachments;
+        this.cc = props.cc ?? [];
+        this.bcc = props.bcc ?? [];
+        this.attachments = props.attachments ?? [];
         this.html = props.html ?? false;
         this.defaultRecipient = props.defaultRecipient;
 
