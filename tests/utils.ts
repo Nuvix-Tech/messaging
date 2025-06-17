@@ -78,8 +78,28 @@ export function isValidEmail(email: string): boolean {
  * Validate phone number format (basic check)
  */
 export function isValidPhoneNumber(phone: string): boolean {
-  const phoneRegex = /^\+?[1-9]\d{1,14}$/;
-  return phoneRegex.test(phone.replace(/\s+/g, ''));
+  if (!phone || typeof phone !== 'string') {
+    return false;
+  }
+  
+  // Remove all non-digit characters except + at the beginning
+  const cleanPhone = phone.replace(/[^\d+]/g, '');
+  
+  // Check basic format requirements
+  if (cleanPhone.length === 0) {
+    return false;
+  }
+  
+  // Remove + for length validation
+  const digitsOnly = cleanPhone.replace('+', '');
+  
+  // Validate length (7-15 digits according to E.164 standard)
+  if (digitsOnly.length < 7 || digitsOnly.length > 15) {
+    return false;
+  }
+  
+  // Ensure all remaining characters are digits
+  return /^\d+$/.test(digitsOnly);
 }
 
 /**

@@ -41,5 +41,5 @@ afterAll(() => {
 });
 
 // Export commonly used test helpers
-export { testConfig, skipIfNoCredentials } from '../test.config';
+export { testConfig, testMessages, skipIfNoCredentials } from '../test.config';
 export * from './utils';

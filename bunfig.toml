@@ -1,0 +1,10 @@
+[test]
+# Test directory configuration
+root = "./tests"
+timeout = 30000 # 30 seconds for API calls
+
+# Preloads
+preload = ["./tests/setup.ts"]
+
+# Enable coverage
+coverage = true

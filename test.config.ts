@@ -89,70 +89,70 @@ export interface TestConfig {
 export const testConfig: TestConfig = {
   mailgun: {
     apiKey: process.env.MAILGUN_API_KEY || 'your-mailgun-api-key',
-    domain: process.env.MAILGUN_DOMAIN || 'your-domain.com',
+    domain: process.env.MAILGUN_DOMAIN || 'your-mailgun-domain.com',
     isEU: process.env.MAILGUN_IS_EU === 'true' || false,
-    testEmail: process.env.TEST_EMAIL || 'test@example.com',
+    testEmail: process.env.TEST_EMAIL || 'your-test@example.com',
   },
   
   sendgrid: {
     apiKey: process.env.SENDGRID_API_KEY || 'your-sendgrid-api-key',
-    testEmail: process.env.TEST_EMAIL || 'test@example.com',
+    testEmail: process.env.TEST_EMAIL || 'your-test@example.com',
   },
   
   smtp: {
-    host: process.env.SMTP_HOST || 'mail.nuvix.in',
+    host: process.env.SMTP_HOST || 'your-smtp-host.com',
     port: parseInt(process.env.SMTP_PORT || '465'),
     secure: process.env.SMTP_SECURE === 'true' || true,
-    username: process.env.SMTP_USERNAME || 'server@nuvix.in',
-    password: process.env.SMTP_PASSWORD || 'Ravi@saini#n1',
-    testEmail: process.env.TEST_EMAIL || 'ravikantsaini047@gmail.com',
+    username: process.env.SMTP_USERNAME || 'your-smtp-username',
+    password: process.env.SMTP_PASSWORD || 'your-smtp-password',
+    testEmail: process.env.TEST_EMAIL || 'your-test@example.com',
   },
   
   twilio: {
     accountSid: process.env.TWILIO_ACCOUNT_SID || 'your-twilio-account-sid',
     authToken: process.env.TWILIO_AUTH_TOKEN || 'your-twilio-auth-token',
-    from: process.env.TWILIO_FROM || '+1234567890',
-    testPhoneNumber: process.env.TEST_PHONE_NUMBER || '+1987654321',
+    from: process.env.TWILIO_FROM || 'your-twilio-phone-number',
+    testPhoneNumber: process.env.TEST_PHONE_NUMBER || 'your-test-phone-number',
   },
   
   vonage: {
     apiKey: process.env.VONAGE_API_KEY || 'your-vonage-api-key',
     apiSecret: process.env.VONAGE_API_SECRET || 'your-vonage-api-secret',
-    from: process.env.VONAGE_FROM || 'YourApp',
-    testPhoneNumber: process.env.TEST_PHONE_NUMBER || '+1987654321',
+    from: process.env.VONAGE_FROM || 'your-vonage-sender-id',
+    testPhoneNumber: process.env.TEST_PHONE_NUMBER || 'your-test-phone-number',
   },
   
   msg91: {
-    senderId: process.env.MSG91_SENDER_ID || 'MSGIND',
+    senderId: process.env.MSG91_SENDER_ID || 'your-msg91-sender-id',
     authKey: process.env.MSG91_AUTH_KEY || 'your-msg91-auth-key',
-    testPhoneNumber: process.env.TEST_PHONE_NUMBER || '+919876543210',
+    testPhoneNumber: process.env.TEST_PHONE_NUMBER || 'your-test-phone-number',
   },
   
   telesign: {
-    customerId: process.env.TELESIGN_CUSTOMER_ID || 'your-customer-id',
+    customerId: process.env.TELESIGN_CUSTOMER_ID || 'your-telesign-customer-id',
     apiKey: process.env.TELESIGN_API_KEY || 'your-telesign-api-key',
-    testPhoneNumber: process.env.TEST_PHONE_NUMBER || '+1987654321',
+    testPhoneNumber: process.env.TEST_PHONE_NUMBER || 'your-test-phone-number',
   },
   
   textmagic: {
-    username: process.env.TEXTMAGIC_USERNAME || 'your-username',
+    username: process.env.TEXTMAGIC_USERNAME || 'your-textmagic-username',
     apiKey: process.env.TEXTMAGIC_API_KEY || 'your-textmagic-api-key',
-    from: process.env.TEXTMAGIC_FROM || 'YourApp',
-    testPhoneNumber: process.env.TEST_PHONE_NUMBER || '+1987654321',
+    from: process.env.TEXTMAGIC_FROM || 'your-textmagic-sender-id',
+    testPhoneNumber: process.env.TEST_PHONE_NUMBER || 'your-test-phone-number',
   },
   
   fcm: {
-    serviceAccountJson: process.env.FCM_SERVICE_ACCOUNT_JSON || '{}',
-    testDeviceToken: process.env.FCM_TEST_DEVICE_TOKEN || 'test-device-token',
+    serviceAccountJson: process.env.FCM_SERVICE_ACCOUNT_JSON || 'your-fcm-service-account-json',
+    testDeviceToken: process.env.FCM_TEST_DEVICE_TOKEN || 'your-fcm-test-device-token',
   },
   
   apns: {
-    keyId: process.env.APNS_KEY_ID || 'your-key-id',
-    teamId: process.env.APNS_TEAM_ID || 'your-team-id',
-    bundleId: process.env.APNS_BUNDLE_ID || 'com.yourapp.bundle',
-    privateKey: process.env.APNS_PRIVATE_KEY || 'your-private-key',
+    keyId: process.env.APNS_KEY_ID || 'your-apns-key-id',
+    teamId: process.env.APNS_TEAM_ID || 'your-apns-team-id',
+    bundleId: process.env.APNS_BUNDLE_ID || 'your-apns-bundle-id',
+    privateKey: process.env.APNS_PRIVATE_KEY || 'your-apns-private-key',
     production: process.env.APNS_PRODUCTION === 'true' || false,
-    testDeviceToken: process.env.APNS_TEST_DEVICE_TOKEN || 'test-device-token',
+    testDeviceToken: process.env.APNS_TEST_DEVICE_TOKEN || 'your-apns-test-device-token',
   },
 };
 
@@ -165,7 +165,7 @@ export const testMessages = {
     content: 'This is a test email sent via the Nuvix messaging library.',
     htmlContent: '<h1>Test Email</h1><p>This is a test email sent via the <strong>Nuvix messaging library</strong>.</p>',
     fromName: 'Nuvix Test',
-    fromEmail: 'noreply@test.com',
+    fromEmail: 'ceo@nuvix.in',
   },
   
   sms: {

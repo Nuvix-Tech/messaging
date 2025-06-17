@@ -123,7 +123,6 @@ export class Sendgrid extends EmailAdapter {
             },
             body
         });
-
         const statusCode = result.statusCode;
 
         if (statusCode === 202) {

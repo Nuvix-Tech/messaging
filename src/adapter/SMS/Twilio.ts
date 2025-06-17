@@ -39,8 +39,8 @@ export class Twilio extends SMSAdapter {
             body: {
                 'Body': message.getContent(),
                 'From': this.from ?? message.getFrom(),
-                'MessagingServiceSid': this.messagingServiceSid ?? undefined,
                 'To': message.getTo()[0],
+                ...(this.messagingServiceSid ? { 'MessagingServiceSid': this.messagingServiceSid ?? undefined } : {}),
             },
         });
 
