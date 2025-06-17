@@ -1,22 +1,75 @@
 {
   "name": "@nuvix/messaging",
-  "module": "index.ts",
+  "version": "1.0.0",
+  "description": "A comprehensive messaging library for Email, SMS, and Push notifications",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
   "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
+    "build": "npm run clean && npm run build:rollup && npm run build:types",
+    "build:rollup": "rollup -c",
+    "build:types": "tsc --emitDeclarationOnly --outDir dist/types",
+    "clean": "rimraf dist",
     "test": "bun test --timeout 30000",
     "test:watch": "bun test --watch --timeout 30000",
     "test:coverage": "bun test --coverage --timeout 30000",
-    "build": "bun build index.ts --outdir dist --format esm",
     "lint": "bunx @biomejs/biome check .",
-    "lint:fix": "bunx @biomejs/biome check --fix ."
+    "lint:fix": "bunx @biomejs/biome check --fix .",
+    "prepublishOnly": "npm run build",
+    "dev": "rollup -c -w"
   },
+  "keywords": [
+    "messaging",
+    "email",
+    "sms",
+    "push-notifications",
+    "mailgun",
+    "sendgrid",
+    "twilio",
+    "fcm",
+    "apns",
+    "notifications"
+  ],
+  "author": "Nuvix",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nuvix/messaging.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nuvix/messaging/issues"
+  },
+  "homepage": "https://github.com/nuvix/messaging#readme",
   "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@rollup/plugin-commonjs": "^28.0.1",
+    "@rollup/plugin-node-resolve": "^15.3.0",
+    "@rollup/plugin-typescript": "^12.1.1",
     "@types/jsonwebtoken": "^9.0.9",
     "@types/nodemailer": "^6.4.17",
-    "@biomejs/biome": "^1.9.4",
     "bun-types": "^1.1.42",
     "jsonwebtoken": "^9.0.2",
-    "nodemailer": "^7.0.3"
+    "nodemailer": "^7.0.3",
+    "prettier": "^3.5.3",
+    "rimraf": "^6.0.1",
+    "rollup": "^4.28.1",
+    "rollup-plugin-dts": "^6.1.1",
+    "tslib": "^2.8.1",
+    "typescript": "^5.7.2"
   },
   "peerDependencies": {
     "typescript": "^5"

@@ -5,11 +5,13 @@ A comprehensive messaging library for Email, SMS, and Push notifications with su
 ## Features
 
 ### Email Adapters
+
 - **Mailgun** - Email delivery service
 - **SendGrid** - Email delivery platform
 - **SMTP** - Generic SMTP support
 
 ### SMS Adapters
+
 - **Twilio** - SMS and communication APIs
 - **Vonage** (formerly Nexmo) - Global communications platform
 - **Msg91** - SMS and communication platform
@@ -17,6 +19,7 @@ A comprehensive messaging library for Email, SMS, and Push notifications with su
 - **TextMagic** - SMS marketing platform
 
 ### Push Notification Adapters
+
 - **FCM** (Firebase Cloud Messaging) - Google's messaging solution
 - **APNS** (Apple Push Notification Service) - Apple's push notification service
 
@@ -33,22 +36,24 @@ This library includes comprehensive tests for all adapters using real API creden
 ### Test Configuration
 
 1. **Copy the example environment file:**
+
    ```bash
    cp .env.example .env
    ```
 
 2. **Configure your credentials in `.env`:**
+
    ```bash
    # Example for Mailgun
    MAILGUN_API_KEY=key-1234567890abcdef
    MAILGUN_DOMAIN=mg.yourdomain.com
    MAILGUN_IS_EU=false
-   
+
    # Example for Twilio
    TWILIO_ACCOUNT_SID=AC1234567890abcdef
    TWILIO_AUTH_TOKEN=your_auth_token
    TWILIO_FROM=+1234567890
-   
+
    # Add other service credentials as needed
    ```
 
@@ -56,10 +61,10 @@ This library includes comprehensive tests for all adapters using real API creden
    ```typescript
    export const testConfig: TestConfig = {
      mailgun: {
-       apiKey: 'your-actual-api-key',
-       domain: 'your-domain.com',
+       apiKey: "your-actual-api-key",
+       domain: "your-domain.com",
        isEU: false,
-       testEmail: 'test@yourdomain.com',
+       testEmail: "test@yourdomain.com",
      },
      // ... other configurations
    };
@@ -110,16 +115,16 @@ bun test tests/adapters/push.test.ts
 ### Email
 
 ```typescript
-import { Mailgun } from '@nuvix/messaging/adapter/Email/Mailgun';
-import { Email } from '@nuvix/messaging/messages/Email';
+import { Mailgun } from "@nuvix/messaging/adapter/Email/Mailgun";
+import { Email } from "@nuvix/messaging/messages/Email";
 
-const adapter = new Mailgun('api-key', 'domain.com');
+const adapter = new Mailgun("api-key", "domain.com");
 const email = new Email({
-  to: ['user@example.com'],
-  subject: 'Hello World',
-  content: 'This is a test email',
-  fromName: 'Your App',
-  fromEmail: 'noreply@yourdomain.com',
+  to: ["user@example.com"],
+  subject: "Hello World",
+  content: "This is a test email",
+  fromName: "Your App",
+  fromEmail: "noreply@yourdomain.com",
 });
 
 const result = await adapter.send(email);
@@ -129,13 +134,13 @@ console.log(`Delivered to ${result.deliveredTo} recipients`);
 ### SMS
 
 ```typescript
-import { Twilio } from '@nuvix/messaging/adapter/SMS/Twilio';
-import { SMS } from '@nuvix/messaging/messages/SMS';
+import { Twilio } from "@nuvix/messaging/adapter/SMS/Twilio";
+import { SMS } from "@nuvix/messaging/messages/SMS";
 
-const adapter = new Twilio('account-sid', 'auth-token', '+1234567890');
+const adapter = new Twilio("account-sid", "auth-token", "+1234567890");
 const sms = new SMS({
-  to: ['+1987654321'],
-  content: 'Hello from your app!',
+  to: ["+1987654321"],
+  content: "Hello from your app!",
 });
 
 const result = await adapter.send(sms);
@@ -144,15 +149,15 @@ const result = await adapter.send(sms);
 ### Push Notifications
 
 ```typescript
-import { FCM } from '@nuvix/messaging/adapter/Push/FCM';
-import { Push } from '@nuvix/messaging/messages/Push';
+import { FCM } from "@nuvix/messaging/adapter/Push/FCM";
+import { Push } from "@nuvix/messaging/messages/Push";
 
-const adapter = new FCM('service-account-json');
+const adapter = new FCM("service-account-json");
 const push = new Push({
-  to: ['device-token'],
-  title: 'New Message',
-  body: 'You have a new notification',
-  data: { type: 'message', id: '123' },
+  to: ["device-token"],
+  title: "New Message",
+  body: "You have a new notification",
+  data: { type: "message", id: "123" },
 });
 
 const result = await adapter.send(push);
