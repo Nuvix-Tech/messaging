@@ -10,76 +10,76 @@
  */
 
 export interface TestConfig {
-  // Email Adapters
-  mailgun: {
-    apiKey: string;
-    domain: string;
-    isEU: boolean;
-    testEmail: string;
-  };
+	// Email Adapters
+	mailgun: {
+		apiKey: string;
+		domain: string;
+		isEU: boolean;
+		testEmail: string;
+	};
 
-  sendgrid: {
-    apiKey: string;
-    testEmail: string;
-  };
+	sendgrid: {
+		apiKey: string;
+		testEmail: string;
+	};
 
-  smtp: {
-    host: string;
-    port: number;
-    secure: boolean;
-    username: string;
-    password: string;
-    testEmail: string;
-  };
+	smtp: {
+		host: string;
+		port: number;
+		secure: boolean;
+		username: string;
+		password: string;
+		testEmail: string;
+	};
 
-  // SMS Adapters
-  twilio: {
-    accountSid: string;
-    authToken: string;
-    from: string;
-    testPhoneNumber: string;
-  };
+	// SMS Adapters
+	twilio: {
+		accountSid: string;
+		authToken: string;
+		from: string;
+		testPhoneNumber: string;
+	};
 
-  vonage: {
-    apiKey: string;
-    apiSecret: string;
-    from: string;
-    testPhoneNumber: string;
-  };
+	vonage: {
+		apiKey: string;
+		apiSecret: string;
+		from: string;
+		testPhoneNumber: string;
+	};
 
-  msg91: {
-    senderId: string;
-    authKey: string;
-    testPhoneNumber: string;
-  };
+	msg91: {
+		senderId: string;
+		authKey: string;
+		testPhoneNumber: string;
+	};
 
-  telesign: {
-    customerId: string;
-    apiKey: string;
-    testPhoneNumber: string;
-  };
+	telesign: {
+		customerId: string;
+		apiKey: string;
+		testPhoneNumber: string;
+	};
 
-  textmagic: {
-    username: string;
-    apiKey: string;
-    from: string;
-    testPhoneNumber: string;
-  };
+	textmagic: {
+		username: string;
+		apiKey: string;
+		from: string;
+		testPhoneNumber: string;
+	};
 
-  // Push Notification Adapters
-  fcm: {
-    serviceAccountJson: string;
-    testDeviceToken: string;
-  };
+	// Push Notification Adapters
+	fcm: {
+		serviceAccountJson: string;
+		testDeviceToken: string;
+	};
 
-  apns: {
-    keyId: string;
-    teamId: string;
-    bundleId: string;
-    privateKey: string;
-    production: boolean;
-    testDeviceToken: string;
-  };
+	apns: {
+		keyId: string;
+		teamId: string;
+		bundleId: string;
+		privateKey: string;
+		production: boolean;
+		testDeviceToken: string;
+	};
 }
 
 /**
@@ -87,128 +87,128 @@ export interface TestConfig {
  * Replace with your actual credentials or use environment variables
  */
 export const testConfig: TestConfig = {
-  mailgun: {
-    apiKey: process.env.MAILGUN_API_KEY || "your-mailgun-api-key",
-    domain: process.env.MAILGUN_DOMAIN || "your-mailgun-domain.com",
-    isEU: process.env.MAILGUN_IS_EU === "true" || false,
-    testEmail: process.env.TEST_EMAIL || "your-test@example.com",
-  },
+	mailgun: {
+		apiKey: process.env.MAILGUN_API_KEY || "your-mailgun-api-key",
+		domain: process.env.MAILGUN_DOMAIN || "your-mailgun-domain.com",
+		isEU: process.env.MAILGUN_IS_EU === "true" || false,
+		testEmail: process.env.TEST_EMAIL || "your-test@example.com",
+	},
 
-  sendgrid: {
-    apiKey: process.env.SENDGRID_API_KEY || "your-sendgrid-api-key",
-    testEmail: process.env.TEST_EMAIL || "your-test@example.com",
-  },
+	sendgrid: {
+		apiKey: process.env.SENDGRID_API_KEY || "your-sendgrid-api-key",
+		testEmail: process.env.TEST_EMAIL || "your-test@example.com",
+	},
 
-  smtp: {
-    host: process.env.SMTP_HOST || "your-smtp-host.com",
-    port: parseInt(process.env.SMTP_PORT || "465"),
-    secure: process.env.SMTP_SECURE === "true" || true,
-    username: process.env.SMTP_USERNAME || "your-smtp-username",
-    password: process.env.SMTP_PASSWORD || "your-smtp-password",
-    testEmail: process.env.TEST_EMAIL || "your-test@example.com",
-  },
+	smtp: {
+		host: process.env.SMTP_HOST || "your-smtp-host.com",
+		port: Number.parseInt(process.env.SMTP_PORT || "465"),
+		secure: process.env.SMTP_SECURE === "true" || true,
+		username: process.env.SMTP_USERNAME || "your-smtp-username",
+		password: process.env.SMTP_PASSWORD || "your-smtp-password",
+		testEmail: process.env.TEST_EMAIL || "your-test@example.com",
+	},
 
-  twilio: {
-    accountSid: process.env.TWILIO_ACCOUNT_SID || "your-twilio-account-sid",
-    authToken: process.env.TWILIO_AUTH_TOKEN || "your-twilio-auth-token",
-    from: process.env.TWILIO_FROM || "your-twilio-phone-number",
-    testPhoneNumber: process.env.TEST_PHONE_NUMBER || "your-test-phone-number",
-  },
+	twilio: {
+		accountSid: process.env.TWILIO_ACCOUNT_SID || "your-twilio-account-sid",
+		authToken: process.env.TWILIO_AUTH_TOKEN || "your-twilio-auth-token",
+		from: process.env.TWILIO_FROM || "your-twilio-phone-number",
+		testPhoneNumber: process.env.TEST_PHONE_NUMBER || "your-test-phone-number",
+	},
 
-  vonage: {
-    apiKey: process.env.VONAGE_API_KEY || "your-vonage-api-key",
-    apiSecret: process.env.VONAGE_API_SECRET || "your-vonage-api-secret",
-    from: process.env.VONAGE_FROM || "your-vonage-sender-id",
-    testPhoneNumber: process.env.TEST_PHONE_NUMBER || "your-test-phone-number",
-  },
+	vonage: {
+		apiKey: process.env.VONAGE_API_KEY || "your-vonage-api-key",
+		apiSecret: process.env.VONAGE_API_SECRET || "your-vonage-api-secret",
+		from: process.env.VONAGE_FROM || "your-vonage-sender-id",
+		testPhoneNumber: process.env.TEST_PHONE_NUMBER || "your-test-phone-number",
+	},
 
-  msg91: {
-    senderId: process.env.MSG91_SENDER_ID || "your-msg91-sender-id",
-    authKey: process.env.MSG91_AUTH_KEY || "your-msg91-auth-key",
-    testPhoneNumber: process.env.TEST_PHONE_NUMBER || "your-test-phone-number",
-  },
+	msg91: {
+		senderId: process.env.MSG91_SENDER_ID || "your-msg91-sender-id",
+		authKey: process.env.MSG91_AUTH_KEY || "your-msg91-auth-key",
+		testPhoneNumber: process.env.TEST_PHONE_NUMBER || "your-test-phone-number",
+	},
 
-  telesign: {
-    customerId: process.env.TELESIGN_CUSTOMER_ID || "your-telesign-customer-id",
-    apiKey: process.env.TELESIGN_API_KEY || "your-telesign-api-key",
-    testPhoneNumber: process.env.TEST_PHONE_NUMBER || "your-test-phone-number",
-  },
+	telesign: {
+		customerId: process.env.TELESIGN_CUSTOMER_ID || "your-telesign-customer-id",
+		apiKey: process.env.TELESIGN_API_KEY || "your-telesign-api-key",
+		testPhoneNumber: process.env.TEST_PHONE_NUMBER || "your-test-phone-number",
+	},
 
-  textmagic: {
-    username: process.env.TEXTMAGIC_USERNAME || "your-textmagic-username",
-    apiKey: process.env.TEXTMAGIC_API_KEY || "your-textmagic-api-key",
-    from: process.env.TEXTMAGIC_FROM || "your-textmagic-sender-id",
-    testPhoneNumber: process.env.TEST_PHONE_NUMBER || "your-test-phone-number",
-  },
+	textmagic: {
+		username: process.env.TEXTMAGIC_USERNAME || "your-textmagic-username",
+		apiKey: process.env.TEXTMAGIC_API_KEY || "your-textmagic-api-key",
+		from: process.env.TEXTMAGIC_FROM || "your-textmagic-sender-id",
+		testPhoneNumber: process.env.TEST_PHONE_NUMBER || "your-test-phone-number",
+	},
 
-  fcm: {
-    serviceAccountJson:
-      process.env.FCM_SERVICE_ACCOUNT_JSON || "your-fcm-service-account-json",
-    testDeviceToken:
-      process.env.FCM_TEST_DEVICE_TOKEN || "your-fcm-test-device-token",
-  },
+	fcm: {
+		serviceAccountJson:
+			process.env.FCM_SERVICE_ACCOUNT_JSON || "your-fcm-service-account-json",
+		testDeviceToken:
+			process.env.FCM_TEST_DEVICE_TOKEN || "your-fcm-test-device-token",
+	},
 
-  apns: {
-    keyId: process.env.APNS_KEY_ID || "your-apns-key-id",
-    teamId: process.env.APNS_TEAM_ID || "your-apns-team-id",
-    bundleId: process.env.APNS_BUNDLE_ID || "your-apns-bundle-id",
-    privateKey: process.env.APNS_PRIVATE_KEY || "your-apns-private-key",
-    production: process.env.APNS_PRODUCTION === "true" || false,
-    testDeviceToken:
-      process.env.APNS_TEST_DEVICE_TOKEN || "your-apns-test-device-token",
-  },
+	apns: {
+		keyId: process.env.APNS_KEY_ID || "your-apns-key-id",
+		teamId: process.env.APNS_TEAM_ID || "your-apns-team-id",
+		bundleId: process.env.APNS_BUNDLE_ID || "your-apns-bundle-id",
+		privateKey: process.env.APNS_PRIVATE_KEY || "your-apns-private-key",
+		production: process.env.APNS_PRODUCTION === "true" || false,
+		testDeviceToken:
+			process.env.APNS_TEST_DEVICE_TOKEN || "your-apns-test-device-token",
+	},
 };
 
 /**
  * Test message templates
  */
 export const testMessages = {
-  email: {
-    subject: "Test Email from Nuvix Messaging",
-    content: "This is a test email sent via the Nuvix messaging library.",
-    htmlContent:
-      "<h1>Test Email</h1><p>This is a test email sent via the <strong>Nuvix messaging library</strong>.</p>",
-    fromName: "Nuvix Test",
-    fromEmail: "ceo@nuvix.in",
-  },
+	email: {
+		subject: "Test Email from Nuvix Messaging",
+		content: "This is a test email sent via the Nuvix messaging library.",
+		htmlContent:
+			"<h1>Test Email</h1><p>This is a test email sent via the <strong>Nuvix messaging library</strong>.</p>",
+		fromName: "Nuvix Test",
+		fromEmail: "ceo@nuvix.in",
+	},
 
-  sms: {
-    content: "This is a test SMS sent via the Nuvix messaging library.",
-  },
+	sms: {
+		content: "This is a test SMS sent via the Nuvix messaging library.",
+	},
 
-  push: {
-    title: "Test Push Notification",
-    body: "This is a test push notification sent via the Nuvix messaging library.",
-    data: {
-      testKey: "testValue",
-      timestamp: new Date().toISOString(),
-    },
-  },
+	push: {
+		title: "Test Push Notification",
+		body: "This is a test push notification sent via the Nuvix messaging library.",
+		data: {
+			testKey: "testValue",
+			timestamp: new Date().toISOString(),
+		},
+	},
 };
 
 /**
  * Helper function to check if credentials are configured
  */
 export function hasValidCredentials(service: keyof TestConfig): boolean {
-  const config = testConfig[service] as any;
+	const config = testConfig[service] as any;
 
-  // Check if any value contains placeholder text
-  for (const [key, value] of Object.entries(config)) {
-    if (typeof value === "string" && value.startsWith("your-")) {
-      return false;
-    }
-  }
+	// Check if any value contains placeholder text
+	for (const [key, value] of Object.entries(config)) {
+		if (typeof value === "string" && value.startsWith("your-")) {
+			return false;
+		}
+	}
 
-  return true;
+	return true;
 }
 
 /**
  * Helper function to skip tests if credentials are not configured
  */
 export function skipIfNoCredentials(service: keyof TestConfig) {
-  if (!hasValidCredentials(service)) {
-    throw new Error(
-      `Skipping ${service} tests - credentials not configured. Please set environment variables or update test.config.ts`,
-    );
-  }
+	if (!hasValidCredentials(service)) {
+		throw new Error(
+			`Skipping ${service} tests - credentials not configured. Please set environment variables or update test.config.ts`,
+		);
+	}
 }

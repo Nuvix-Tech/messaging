@@ -15,10 +15,10 @@ export { Attachment } from "./src/messages/email/Attachment";
 export { Adapter, Priority } from "./src/adapter";
 export { Response } from "./src/response";
 export type {
-  Message,
-  SendResult,
-  RequestResponse,
-  MultiRequestResponse,
+	Message,
+	SendResult,
+	RequestResponse,
+	MultiRequestResponse,
 } from "./src/types";
 
 // Email adapters
